@@ -5,8 +5,8 @@ Future<List<int>> day1(File file) async {
   final contents = await file.readAsLines();
 
   const int n = 3;
-  final initial = List.generate(n + 1, (_) => 0);
-  final bestN = contents.fold(initial, (value, element) {
+
+  final bestN = contents.fold(List.filled(n, 0), (value, element) {
     if (element.isEmpty) {
       final bestN = value.sublist(0, n);
       final least = bestN.reduce(min);
