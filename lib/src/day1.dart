@@ -6,7 +6,7 @@ Future<List<int>> day1(File file) async {
 
   const int n = 3;
 
-  final bestN = contents.fold(List.filled(n, 0), (value, element) {
+  final bestN = contents.fold(List.filled(n + 1, 0), (value, element) {
     if (element.isEmpty) {
       final bestN = value.sublist(0, n);
       final least = bestN.reduce(min);
