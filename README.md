@@ -11,3 +11,9 @@ or even
 ```console
 dart run ./bin/aoc2022.dart -i day1.example.txt -d 1
 ```
+
+Get some help with:
+
+```console
+dart run ./bin/aoc2022.dart --help
+```
