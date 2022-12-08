@@ -1,6 +1,6 @@
 ## Usage
 
-Make sure an input file available at root and run.
+Make sure an input file is available at root and run:
 
 ```console
 dart run ./bin/aoc2022.dart --file day1.example.txt --day 1
