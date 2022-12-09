@@ -6,20 +6,23 @@ Future<List<int>> day1(File file) async {
 
   const int n = 3;
 
-  final bestN = contents.fold(List.filled(n + 1, 0), (value, element) {
-    if (element.isEmpty) {
-      final bestN = value.sublist(0, n);
-      final least = bestN.reduce(min);
-      if (least < value.last) {
-        final pos = bestN.indexOf(least);
-        value[pos] = value.last;
+  final bestN = contents.fold(
+    List.filled(n + 1, 0),
+    (value, element) {
+      if (element.isEmpty) {
+        final bestN = value.sublist(0, n);
+        final least = bestN.reduce(min);
+        if (least < value.last) {
+          final pos = bestN.indexOf(least);
+          value[pos] = value.last;
+        }
+        value.last = 0;
+      } else {
+        value.last += int.parse(element);
       }
-      value.last = 0;
-    } else {
-      value.last += int.parse(element);
-    }
-    return value;
-  }).sublist(0, n);
+      return value;
+    },
+  ).sublist(0, n);
 
   final best = bestN.reduce(max);
   final sumOfBestN = bestN.reduce((a, b) => a + b);
