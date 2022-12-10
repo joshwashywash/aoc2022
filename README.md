@@ -18,4 +18,4 @@ Get some help with:
 dart run ./bin/aoc2022.dart --help
 ```
 
-The output is a list where `list[0] ` is the answer to part 1 and `list[1] ` is the answer to part 2. If there is the list only has one element, that means I haven't done part 2 for that day yet.
+The output is a list where `list[0]` is the answer to part 1 and `list[1]` is the answer to part 2. If there is the list only has one element, that means I haven't done part 2 for that day yet.
