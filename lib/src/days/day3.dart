@@ -1,5 +1,5 @@
 import 'dart:io';
-import './utils.dart' as utils;
+import '../utils.dart' as utils;
 
 final cases = [
   ['a', 'z'],
