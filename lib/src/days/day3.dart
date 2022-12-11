@@ -2,8 +2,6 @@ import 'dart:io';
 
 import 'package:collection/collection.dart';
 
-import '../utils.dart' as utils;
-
 final cases = [
   ['a', 'z'],
   ['A', 'Z']
@@ -16,7 +14,7 @@ final cases = [
 
 final alphabet = [for (final c in cases) ...c];
 
-final flipped = utils.reverseMap(alphabet.asMap());
+final flipped = alphabet.asMap().map((key, value) => MapEntry(value, key));
 
 Future<List<int>> day3(File file) async {
   final content = await file.readAsLines();
@@ -29,11 +27,13 @@ Future<List<int>> day3(File file) async {
       .slices(groupSize)
       .map((group) => group.map((list) => list.split('')));
 
-  return [part1, part2]
-      .map((p) => p
-          .map((s) => s.map((l) => l.toSet()))
-          .map((s) => s.reduce((a, b) => a.intersection(b)))
-          .map((s) => 1 + (flipped[s.first] ?? 0))
-          .reduce((a, b) => a + b))
-      .toList();
+  return [part1, part2].map((p) {
+    return p.map((s) {
+      final single = s
+          .map((list) => list.toSet())
+          .reduce((a, b) => a.intersection(b))
+          .first;
+      return (flipped[single] ?? 0) + 1;
+    }).reduce((a, b) => a + b);
+  }).toList();
 }
