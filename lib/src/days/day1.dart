@@ -24,8 +24,8 @@ Future<List<int>> day1(File file) async {
     },
   ).sublist(0, n);
 
-  final best = bestN.reduce(max);
-  final sumOfBestN = bestN.reduce((a, b) => a + b);
+  final part1 = bestN.reduce(max);
+  final part2 = bestN.reduce((a, b) => a + b);
 
-  return [best, sumOfBestN];
+  return [part1, part2];
 }

@@ -7,14 +7,12 @@ import '../utils.dart' as utils;
 final cases = [
   ['a', 'z'],
   ['A', 'Z']
-].map((pair) => pair.map((l) => l.codeUnitAt(0))).map(
-  (units) {
-    return List.generate(
-      1 + units.last - units.first,
-      (i) => String.fromCharCode(units.first + i),
-    );
-  },
-);
+].map((pair) => pair.map((l) => l.codeUnitAt(0))).map((units) {
+  return List.generate(
+    1 + units.last - units.first,
+    (i) => String.fromCharCode(units.first + i),
+  );
+});
 
 final alphabet = [for (final c in cases) ...c];
 
