@@ -3,12 +3,12 @@ import 'dart:io';
 import 'package:aoc2022/aoc2022.dart';
 import 'package:args/args.dart';
 
-final map = {
-  '1': day1,
-  '2': day2,
-  '3': day3,
-  '4': day4,
-};
+final days = [
+  day1,
+  day2,
+  day3,
+  day4,
+].asMap().map((key, value) => MapEntry('${key + 1}', value));
 
 final parser = ArgParser()
   ..addOption(
@@ -20,7 +20,7 @@ final parser = ArgParser()
   ..addOption(
     'day',
     abbr: 'd',
-    allowed: map.keys,
+    allowed: days.keys,
     help: 'Day number to use.',
     defaultsTo: '1',
   )
@@ -39,10 +39,8 @@ void main(List<String> arguments) async {
       final file = File(results['input']);
       final day = results['day'];
 
-      if (map.containsKey(day)) {
-        final result = await map[day]!(file);
-        print(result);
-      }
+      final result = await days[day]!(file);
+      print(result);
     }
   } catch (e) {
     print('error: $e\n${parser.usage}');
