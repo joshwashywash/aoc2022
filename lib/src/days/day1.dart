@@ -2,11 +2,11 @@ import 'dart:io';
 import 'dart:math';
 
 Future<List<int>> day1(File file) async {
-  final contents = await file.readAsLines();
+  final lines = await file.readAsLines();
 
   const int n = 3;
 
-  final bestN = contents.fold(
+  final bestN = lines.fold(
     List.filled(n + 1, 0),
     (value, element) {
       if (element.isEmpty) {

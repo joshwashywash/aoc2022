@@ -7,6 +7,7 @@ final map = {
   '1': day1,
   '2': day2,
   '3': day3,
+  '4': day4,
 };
 
 final parser = ArgParser()
@@ -19,7 +20,7 @@ final parser = ArgParser()
   ..addOption(
     'day',
     abbr: 'd',
-    allowed: List.generate(map.length, (i) => '${1 + i}'),
+    allowed: map.keys,
     help: 'Day number to use.',
     defaultsTo: '1',
   )

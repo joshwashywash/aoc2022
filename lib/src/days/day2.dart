@@ -1,7 +1,7 @@
 import 'dart:io';
 
 Future<List<int>> day2(File file) async {
-  final contents = await file.readAsLines();
+  final lines = await file.readAsLines();
 
   // could generate these maps but meh
 
@@ -30,7 +30,7 @@ Future<List<int>> day2(File file) async {
   };
 
   return [
-    contents.map((line) => partOneMap[line] ?? 0),
-    contents.map((line) => partTwoMap[line] ?? 0),
+    lines.map((line) => partOneMap[line] ?? 0),
+    lines.map((line) => partTwoMap[line] ?? 0),
   ].map((c) => c.reduce((a, b) => a + b)).toList();
 }
