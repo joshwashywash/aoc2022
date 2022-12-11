@@ -21,26 +21,19 @@ final flipped = utils.reverseMap(alphabet.asMap());
 Future<List<int>> day3(File file) async {
   final content = await file.readAsLines();
 
-  final part1 = content.map((line) {
-    final halfway = line.length ~/ 2;
-
-    final common = line
-        .split('')
-        .slices(halfway)
-        .map((piece) => piece.toSet())
-        .reduce((a, b) => a.intersection(b));
-
-    return (flipped[common.first] ?? 0) + 1;
-  }).reduce((a, b) => a + b);
+  final part1 = content.map((line) => line.split('').slices(line.length ~/ 2));
 
   const groupSize = 3;
 
-  final part2 = content.slices(groupSize).map((group) {
-    final common = group
-        .map((list) => list.split('').toSet())
-        .reduce((a, b) => a.intersection(b));
-    return (flipped[common.first] ?? 0) + 1;
-  }).reduce((a, b) => a + b);
+  final part2 = content
+      .slices(groupSize)
+      .map((group) => group.map((list) => list.split('')));
 
-  return [part1, part2];
+  return [part1, part2]
+      .map((p) => p
+          .map((s) => s.map((l) => l.toSet()))
+          .map((s) => s.reduce((a, b) => a.intersection(b)))
+          .map((s) => 1 + (flipped[s.first] ?? 0))
+          .reduce((a, b) => a + b))
+      .toList();
 }
