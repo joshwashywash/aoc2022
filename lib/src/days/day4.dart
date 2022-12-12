@@ -1,6 +1,6 @@
 import 'dart:io';
 
-bool overlaps(Iterable<Iterable<num>> pairs) {
+bool fullyContains(Iterable<Iterable<num>> pairs) {
   return (pairs.first.first <= pairs.last.first &&
           pairs.first.last >= pairs.last.last) ||
       (pairs.last.first <= pairs.first.first &&
@@ -10,13 +10,12 @@ bool overlaps(Iterable<Iterable<num>> pairs) {
 Future<List<int>> day4(File file) async {
   final lines = await file.readAsLines();
 
-  final part1 = lines.map((line) {
-    final pairs = line.split(',').map((sep) {
-      return sep.split('-').map((a) => int.parse(a));
-    });
+  final pairs = lines.map(
+      (line) => line.split(',').map((sep) => sep.split('-').map(int.parse)));
 
-    return overlaps(pairs) ? 1 : 0;
-  }).reduce((a, b) => a + b);
+  final part1 = pairs.map((pair) => fullyContains(pair));
 
-  return [part1];
+  return [part1].map((p) {
+    return p.map((predicate) => predicate ? 1 : 0).reduce((a, b) => a + b);
+  }).toList();
 }
