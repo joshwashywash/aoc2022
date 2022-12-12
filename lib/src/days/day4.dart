@@ -15,8 +15,9 @@ bool overlaps(Iterable<Iterable<num>> pairs) {
 Future<List<int>> day4(File file) async {
   final lines = await file.readAsLines();
 
-  final pairs = lines.map(
-      (line) => line.split(',').map((sep) => sep.split('-').map(int.parse)));
+  final pairs = lines.map((line) {
+    return line.split(',').map((sep) => sep.split('-').map(int.parse));
+  });
 
   final part1 = pairs.map(fullyContains);
   final part2 = pairs.map(overlaps);
