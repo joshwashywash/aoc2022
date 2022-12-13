@@ -18,4 +18,10 @@ Get some help with:
 dart run ./bin/aoc2022.dart --help
 ```
 
+## Output
+
 The output is a list where `list[0]` is the answer to part 1 and `list[1]` is the answer to part 2. If there is one element in the list, that means I haven't done part 2 for that day yet.
+
+## Overall Approach
+
+There is a mix of approaches in the codebase, but there is a trend toward more functional and stream-oriented solutions in later days.

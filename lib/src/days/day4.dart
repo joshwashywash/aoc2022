@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:convert';
 
 bool fullyContains(Iterable<Iterable<num>> pairs) {
   return (pairs.first.first <= pairs.last.first &&
@@ -13,16 +14,18 @@ bool overlaps(Iterable<Iterable<num>> pairs) {
 }
 
 Future<List<int>> day4(File file) async {
-  final lines = await file.readAsLines();
-
-  final pairs = lines.map((line) {
-    return line.split(',').map((sep) => sep.split('-').map(int.parse));
+  final l = await file
+      .openRead()
+      .transform(utf8.decoder)
+      .transform(LineSplitter())
+      .map((line) {
+    final pairs = line.split(',').map((sep) => sep.split('-').map(int.parse));
+    return [fullyContains, overlaps].map((f) => f(pairs) ? 1 : 0);
+  }).reduce((prev, curr) {
+    return [
+      prev.first + curr.first,
+      prev.last + curr.last,
+    ];
   });
-
-  final part1 = pairs.map(fullyContains);
-  final part2 = pairs.map(overlaps);
-
-  return [part1, part2].map((p) {
-    return p.map((predicate) => predicate ? 1 : 0).reduce((a, b) => a + b);
-  }).toList();
+  return l.toList();
 }
