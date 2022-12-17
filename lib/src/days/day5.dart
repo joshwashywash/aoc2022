@@ -19,10 +19,8 @@ Future<List<String>> day5(File file) async {
         // adding 1 skips the first `[`
         return stackLine[4 * stackIndex + 1];
       },
-    ),
-  ).map((stack) {
-    return stack.where((item) => item != ' ').toList();
-  }).toList();
+    ).where((item) => item != ' ').toList(),
+  );
 
   final moves = lines.sublist(blankLineIndex + 1);
   final exp = RegExp(r'\d+');
