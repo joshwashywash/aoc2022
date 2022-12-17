@@ -1,10 +1,10 @@
 import 'dart:io';
 import 'dart:math';
 
-Future<List<int>> day1(File file) async {
+Future<List<String>> day1(File file) async {
   final lines = await file.readAsLines();
 
-  const int n = 3;
+  const n = 3;
 
   final bestN = lines.fold(
     List.filled(n + 1, 0),
@@ -27,5 +27,5 @@ Future<List<int>> day1(File file) async {
   final part1 = bestN.reduce(max);
   final part2 = bestN.reduce((a, b) => a + b);
 
-  return [part1, part2];
+  return ['$part1', '$part2'];
 }

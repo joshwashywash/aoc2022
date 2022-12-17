@@ -8,6 +8,7 @@ final days = [
   day2,
   day3,
   day4,
+  day5,
 ].asMap().map((key, value) => MapEntry('${key + 1}', value));
 
 final parser = ArgParser()
@@ -33,16 +34,22 @@ final parser = ArgParser()
 void main(List<String> arguments) async {
   try {
     final results = parser.parse(arguments);
-    if (results['help']) {
+    if (results['help'] as bool) {
       print(parser.usage);
     } else {
-      final file = File(results['input']);
+      final file = File(results['input'] as String);
       final day = results['day'];
 
-      final result = await days[day]!(file);
-      print(result);
+      final f = days[day] ?? (File file) => Future.value([]);
+
+      final result = await f(file);
+      if (result.isEmpty) {
+        throw Exception('Somehow you got past the arg parser. Nice job.');
+      } else {
+        print(result);
+      }
     }
   } catch (e) {
-    print('error: $e\n${parser.usage}');
+    print('error: $e${'\n' * 2}${parser.usage}');
   }
 }

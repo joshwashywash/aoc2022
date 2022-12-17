@@ -10,8 +10,8 @@ environment:
 #   path: ^1.8.0
 
 dev_dependencies:
-  lints: ^2.0.0
   test: ^1.16.0
+  very_good_analysis: ^3.1.0
 dependencies:
   args: ^2.3.1
   collection: ^1.17.0

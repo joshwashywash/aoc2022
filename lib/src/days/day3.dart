@@ -16,7 +16,7 @@ final alphabet = [for (final c in cases) ...c];
 
 final flipped = alphabet.asMap().map((key, value) => MapEntry(value, key));
 
-Future<List<int>> day3(File file) async {
+Future<List<String>> day3(File file) async {
   final lines = await file.readAsLines();
 
   final part1 = lines.map((line) => line.split('').slices(line.length ~/ 2));
@@ -28,12 +28,14 @@ Future<List<int>> day3(File file) async {
       .map((group) => group.map((list) => list.split('')));
 
   return [part1, part2].map((p) {
-    return p.map((s) {
+    final sum = p.map((s) {
       final single = s
           .map((list) => list.toSet())
           .reduce((a, b) => a.intersection(b))
           .first;
       return (flipped[single] ?? 0) + 1;
     }).reduce((a, b) => a + b);
+
+    return '$sum';
   }).toList();
 }
