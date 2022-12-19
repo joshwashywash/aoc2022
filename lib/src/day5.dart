@@ -27,8 +27,7 @@ Future<List<String>> day5(File file) async {
   final instructions = moves.map((move) {
     return exp
         .allMatches(move)
-        .map((matches) => matches.group(0) ?? '0')
-        .map(int.parse);
+        .map((matches) => int.parse(matches.group(0) ?? '0'));
   });
 
   // pattern matching is coming in dart 3 which should make things like
