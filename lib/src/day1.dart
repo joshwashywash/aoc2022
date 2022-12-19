@@ -1,31 +1,24 @@
 import 'dart:io';
 import 'dart:math';
 
+import 'package:collection/collection.dart';
+
 Future<List<String>> day1(File file) async {
-  final lines = await file.readAsLines();
-
   const n = 3;
-
-  final bestN = lines.fold(
-    List.filled(n + 1, 0),
-    (value, element) {
-      if (element.isEmpty) {
-        final bestN = value.sublist(0, n);
-        final least = bestN.reduce(min);
-        if (least < value.last) {
-          final pos = bestN.indexOf(least);
-          value[pos] = value.last;
-        }
-        value.last = 0;
-      } else {
-        value.last += int.parse(element);
-      }
-      return value;
+  final lines = await file.readAsLines();
+  final maxes = lines.splitBefore((e) => e.isEmpty).map((thing) {
+    return thing.map((e) => int.tryParse(e) ?? 0).reduce((a, b) => a + b);
+  }).fold(
+    List.filled(n, 0),
+    (maxes, element) {
+      final minIndex = maxes.indexOf(maxes.reduce(min));
+      if (maxes[minIndex] < element) maxes[minIndex] = element;
+      return maxes;
     },
-  ).sublist(0, n);
+  );
 
-  final part1 = bestN.reduce(max);
-  final part2 = bestN.reduce((a, b) => a + b);
+  final part1 = maxes.reduce(max);
+  final part2 = maxes.reduce((a, b) => a + b);
 
-  return ['$part1', '$part2'];
+  return [part1, part2].map((p) => '$p').toList();
 }

@@ -28,14 +28,15 @@ Future<List<String>> day3(File file) async {
       .map((group) => group.map((list) => list.split('')));
 
   return [part1, part2].map((p) {
-    final sum = p.map((s) {
-      final single = s
-          .map((list) => list.toSet())
-          .reduce((a, b) => a.intersection(b))
-          .first;
-      return (flipped[single] ?? 0) + 1;
-    }).reduce((a, b) => a + b);
-
-    return '$sum';
+    return p
+        .map((s) {
+          final single = s
+              .map((list) => list.toSet())
+              .reduce((a, b) => a.intersection(b))
+              .first;
+          return (flipped[single] ?? 0) + 1;
+        })
+        .reduce((a, b) => a + b)
+        .toString();
   }).toList();
 }

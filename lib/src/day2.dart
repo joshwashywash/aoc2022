@@ -30,7 +30,9 @@ Future<List<String>> day2(File file) async {
   };
 
   return [
-    lines.map((line) => partOneMap[line] ?? 0),
-    lines.map((line) => partTwoMap[line] ?? 0),
-  ].map((c) => '${c.reduce((a, b) => a + b)}').toList();
+    partOneMap,
+    partTwoMap,
+  ].map((m) {
+    return lines.map((line) => m[line] ?? 0).reduce((a, b) => a + b).toString();
+  }).toList();
 }
