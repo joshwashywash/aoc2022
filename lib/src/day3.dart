@@ -6,10 +6,10 @@ final cases = [
   ['a', 'z'],
   ['A', 'Z']
 ].map((pair) => pair.map((l) => l.codeUnitAt(0))).map((units) {
-  return List.generate(
-    1 + units.last - units.first,
-    (i) => String.fromCharCode(units.first + i),
-  );
+  return [
+    for (var i = 0; i < 1 + units.last - units.first; i += 1)
+      String.fromCharCode(units.first + i),
+  ];
 });
 
 final alphabet = [for (final c in cases) ...c];
