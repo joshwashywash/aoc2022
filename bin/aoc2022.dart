@@ -9,6 +9,7 @@ final days = [
   day3,
   day4,
   day5,
+  day6,
 ].asMap().map((key, value) => MapEntry('${key + 1}', value));
 
 final parser = ArgParser()
