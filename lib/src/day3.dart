@@ -2,21 +2,15 @@ import 'dart:io';
 
 import 'package:collection/collection.dart';
 
-final cases = [
-  ['a', 'z'],
-  ['A', 'Z']
-].map((pair) => pair.map((l) => l.codeUnitAt(0))).map((units) {
-  return [
-    for (var i = 0; i < 1 + units.last - units.first; i += 1)
-      String.fromCharCode(units.first + i),
-  ];
-});
+// this could be a compile-time constant
 
-final alphabet = [for (final c in cases) ...c];
-
-final flipped = alphabet.asMap().map((key, value) => MapEntry(value, key));
+final alphabet = 'abcdefghijklmnopqrstuvwxyz' 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    .split('')
+    .asMap()
+    .map((k, v) => MapEntry(v, k));
 
 Future<List<String>> day3(File file) async {
+  print(alphabet);
   final lines = await file.readAsLines();
 
   final part1 = lines.map((line) => line.split('').slices(line.length ~/ 2));
@@ -34,7 +28,7 @@ Future<List<String>> day3(File file) async {
               .map((list) => list.toSet())
               .reduce((a, b) => a.intersection(b))
               .first;
-          return (flipped[single] ?? 0) + 1;
+          return (alphabet[single] ?? 0) + 1;
         })
         .reduce((a, b) => a + b)
         .toString();
