@@ -2,12 +2,12 @@ import 'dart:io';
 
 import 'package:collection/collection.dart';
 
-// this could be a compile-time constant
+const _lowercases = 'abcdefghijklmnopqrstuvwxyz';
+final _uppercases = _lowercases.toUpperCase();
 
-final _alphabet = 'abcdefghijklmnopqrstuvwxyz' 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    .split('')
-    .asMap()
-    .map((k, v) => MapEntry(v, k));
+final _alphabet = '$_lowercases$_uppercases'.split('').asMap().map((k, v) {
+  return MapEntry(v, k);
+});
 
 Future<List<String>> day3(File file) async {
   final lines = await file.readAsLines();
